@@ -1,0 +1,27 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html ng-app="contatooh">
+<head>
+	<meta charset="utf-8">
+	<!-- <base href="/"> -->
+	<meta name="viewport" content="width=device-width">
+	<title>contatooh</title>
+	<link rel="stylesheet" href="css/index.min.css">
+</head>
+<body class="container" ng-controller="ContatosController as contatoController">
+	<%if (usuarioLogado.length > 0) { %>
+		<div class="text-right">
+			<p>
+				Logado como: 
+				<span id="usuario-logado">
+					<%=usuarioLogado %>
+				<span>
+				<a href="/logout">Logout</a>
+			</p>
+		</div>
+	<% } %>
+	<ng-view></ng-view>
+
+	<script src="js/index.min.js"></script>
+</body>
+</html>
