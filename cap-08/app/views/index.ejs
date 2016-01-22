@@ -1,0 +1,35 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html ng-app="contatooh">
+<head>
+	<meta charset="utf-8">
+	<!-- <base href="/"> -->
+	<meta name="viewport" content="width=device-width">
+	<title>contatooh</title>
+	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.css">
+</head>
+<body class="container" ng-controller="ContatosController as contatoController">
+	<%if (usuarioLogado.length > 0) { %>
+		<div class="text-right">
+			<p>
+				Logado como: 
+				<span id="usuario-logado">
+					<%=usuarioLogado %>
+				<span>
+				<a href="/logout">Logout</a>
+			</p>
+		</div>
+	<% } %>
+	<ng-view></ng-view>
+
+	<script src="vendor/angular/angular.js"></script>
+	<script src="vendor/angular-route/angular-route.js"></script>
+	<script src="vendor/angular-resource/angular-resource.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/services/contatoService.js"></script>
+	<script src="js/controllers/ContatosController.js"></script>
+	<script src="js/controllers/ContatoController.js"></script>
+	<script src="js/services/InterceptorService.js"></script>
+</body>
+</html>
