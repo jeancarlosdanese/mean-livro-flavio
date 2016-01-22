@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+var helmet = require('helmet');
 
 module.exports = function() {
 	var app = express();
@@ -34,11 +35,23 @@ module.exports = function() {
 	app.use(passport.initialize());  // deve vir antes do "app.use(passport.session())"
 	app.use(passport.session());
 
+	// opções de sugurança
+	// app.use(helmet()); // ativa todos os helmet
+	app.use(helmet.xframe());
+	app.use(helmet.xssFilter());
+	app.use(helmet.nosniff());
+	app.disable('x-powered-by');
+
 	load('models', {cwd: 'app'})
 		.then('controllers')
     	.then('routes/auth.js')
 		.then('routes')
 		.into(app);
+
+	// se nenhum rota atender, direciona para página 404
+	app.get('*', function(req, res) {
+		res.status(404).render('404');
+	});
 
 	return app;
 };
